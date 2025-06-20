@@ -9,8 +9,8 @@ Para clonar este repositorio y usarlo de manera local se debe instalar git. Se p
 Luego, hay que clonar y preparar el proyecto. Esto se hace con los siguinetes comandos
 
 ```
-git clone ...
-cd ...
+git clone https://github.com/ljtc/AS1Lean.git
+cd AS1Lean
 lake exe cache get
 ```
  Después de esto ya se puede abrir el proyecto y trabajar en él.
