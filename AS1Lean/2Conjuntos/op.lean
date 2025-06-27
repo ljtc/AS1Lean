@@ -5,8 +5,18 @@ variable (s t u : Set α)
 
 open Set
 
---# `Set α` es un álgebra de Boole
---## Conmutatividad
+--Algunas cosas que serán útiles
+#check mem_setOf
+#check subset_def
+#check inter_def
+#check mem_inter_iff
+#check union_def
+#check mem_union
+#check mem_compl_iff
+
+
+--## `Set α` es un álgebra de Boole
+--### Conmutatividad
 
 example : s ∩ t = t ∩ s := by
   ext x; constructor
@@ -20,7 +30,7 @@ example : s ∪ t = t ∪ s := by
   rw [mem_union, mem_union, or_comm]
 
 
---## Asociatividad
+--### Asociatividad
 
 example : s ∩ (t ∩ u) = (s ∩ t) ∩ u := by
   ext x
@@ -46,7 +56,7 @@ example : s ∪ (t ∪ u) = (s ∪ t) ∪ u := by
       exact xu
 
 
---## Distributividad
+--### Distributividad
 
 example : s ∩ (t ∪ u) = (s ∩ t) ∪ (s ∩ u) := by
   ext x
@@ -63,7 +73,7 @@ example : s ∪ (t ∩ u) = (s ∪ t) ∩ (s ∪ u) := by
   simp only [mem_union, mem_inter_iff,or_and_left]
 
 
---## Idempotencia
+--### Idempotencia
 
 example : s ∪ s = s := by
   ext x; constructor
@@ -78,7 +88,7 @@ example : s ∩ s = s := by
   rw [mem_inter_iff, and_self]
 
 
---## Absorción
+--### Absorción
 
 example : s ∩ (t ∪ s) = s := by
   ext x; constructor
@@ -98,7 +108,7 @@ example : s ∪ (t ∩ s) = s := by
     exact xs
 
 
---## Neutro
+--### Neutro
 
 example : s ∩ ⊤ = s := by
   ext x; constructor
@@ -114,7 +124,7 @@ example : s ∪ ∅ = s := by
   rw [mem_union, mem_empty_iff_false,or_false]
 
 
---## Complemento
+--### Complemento
 
 example : s ∪ sᶜ = ⊤ := by
   ext x; constructor
@@ -133,7 +143,7 @@ example : s ∩ sᶜ = ∅ := by
   rw [mem_empty_iff_false]
 
 
---## Intersección es un ínfimo
+--### Intersección es un ínfimo
 
 example : s ∩ t ⊆ s := by
   intro x ⟨xs, _⟩
@@ -150,7 +160,7 @@ example (h1 : u ⊆ s) (h2 : u ⊆ t) : u ⊆ s ∩ t := by
   · apply h2; exact xu
 
 
---## Unión es un supremo
+--### Unión es un supremo
 
 example : s ⊆ s ∪ t := by
   intro x xs
@@ -168,7 +178,7 @@ example (h1 : s ⊆ u) (h2 : t ⊆ u) : s ∪ t ⊆ u := by
   · apply h2; exact xt
 
 
---## De Morgan
+--### De Morgan
 
 example : (s ∩ t)ᶜ = sᶜ ∪ tᶜ := by
   ext x; constructor

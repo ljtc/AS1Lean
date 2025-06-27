@@ -99,3 +99,30 @@ example : (A ×ˢ B₁) ∩ (A ×ˢ B₂) = A ×ˢ (B₁ ∩ B₂) := by
 example : (A₁ ×ˢ B) ∩ (A₂ ×ˢ B) = (A₁ ∩ A₂) ×ˢ B := by
   ext ⟨x,y⟩
   simp only [mem_prod, mem_inter_iff, <-and_and_right]
+
+example : (A₁ ×ˢ B) ∪ (A₂ ×ˢ B) = (A₁ ∪ A₂) ×ˢ B := by
+  ext ⟨x,y⟩
+  constructor
+  · rintro (h1 | h2)
+    · simp only [mem_prod] at *
+      constructor
+      · left; exact h1.1
+      · exact h1.2
+    · simp only [mem_prod] at *
+      constructor
+      · right; exact h2.1
+      · exact h2.2
+  · intro h
+    simp only [mem_prod] at h
+    rcases h with ⟨ha, hb⟩
+    rcases ha with (ha1 | ha2)
+    · left
+      simp only [mem_prod]
+      constructor; assumption'
+    · right
+      simp only [mem_prod]
+      constructor; assumption'
+
+example : (A ×ˢ B₁) ∪ (A ×ˢ B₂) = A ×ˢ (B₁ ∪ B₂) := by sorry
+
+example : (A₁ ×ˢ B₁) ∪ (A₂ ×ˢ B₂) = (A₁ ∪ A₂) ×ˢ (B₁ ∪ B₂) := by sorry
