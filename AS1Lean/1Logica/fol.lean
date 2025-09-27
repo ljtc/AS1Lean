@@ -1,4 +1,5 @@
 import Mathlib.Tactic
+import Mathlib.Data.Set.Basic
 
 variable (α : Type) (p q : α → Prop)
 variable (c r : Prop)
@@ -7,9 +8,9 @@ variable (c r : Prop)
 # Lógica de primer orden
 -/
 
-/-
-## Donde la variable cuantificada no aparece
--/
+
+-- ## Donde la variable cuantificada no aparece
+
 example (a : α) : (∃ x : α, c) ↔ c := by
   constructor
   · intro ⟨_, hc⟩
@@ -25,9 +26,8 @@ example (a : α) : (∀ x : α, r) ↔ r := by
     assumption
 
 
-/-
-## Comportamioento con la conjunción
--/
+
+-- ## Comportamioento con la conjunción
 
 -- ∀ con ∧
 example : (∀ x, p x ∧ q x) ↔ (∀ x, p x) ∧ (∀ x, q x) := by
@@ -72,9 +72,8 @@ example : (∃ x, p x ∧ c) ↔ (∃ x, p x) ∧ c := by
     exact ⟨a, ⟨hp, hc⟩⟩
 
 
-/-
-## Comportamiento con la disyunción
--/
+
+-- ## Comportamiento con la disyunción
 
 -- ∀ con ∨
 -- sólo se vale una implicación
@@ -136,9 +135,8 @@ example : (∀ x, p x ∨ c) ↔ (∀ x, p x) ∨ c := by
       assumption
 
 
-/-
-## Comportamiento con la implicación
--/
+
+-- ## Comportamiento con la implicación
 
 -- ∀ con →
 -- sólo se vale una implicación
@@ -191,9 +189,8 @@ example : (∀ x, r → p x) ↔ (r → ∀ x, p x) := by
     exact (h hr) a
 
 
-/-
-## Comportamiento con la negación
--/
+-- ## Comportamiento con la negación
+
 example : (∀ x, p x) ↔ ¬ (∃ x, ¬ p x) := by
   constructor
   · intro h ⟨a, hnp⟩
@@ -225,3 +222,12 @@ example : (¬ ∀ x, p x) ↔ (∃ x, ¬ p x) := by
     assumption
   · intro ⟨a, hnp⟩ h
     exact hnp (h a)
+
+
+-- ## Demostración por vacuidad
+
+open Set
+
+example : ∀ x ∈ (∅ : Set α), p x := by
+  intro x xe
+  contradiction
