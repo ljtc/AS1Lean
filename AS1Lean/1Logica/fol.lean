@@ -6,11 +6,12 @@ variable (c r : Prop)
 
 /-
 # Lógica de primer orden
+Veremos que algunas fórmulas son universalmente válidas
 -/
 
 
 -- ## Donde la variable cuantificada no aparece
-
+-- Cuantificar una variable que no aparece no hace nada
 example (a : α) : (∃ x : α, c) ↔ c := by
   constructor
   · intro ⟨_, hc⟩
@@ -28,7 +29,6 @@ example (a : α) : (∀ x : α, r) ↔ r := by
 
 
 -- ## Comportamioento con la conjunción
-
 -- ∀ con ∧
 example : (∀ x, p x ∧ q x) ↔ (∀ x, p x) ∧ (∀ x, q x) := by
   constructor

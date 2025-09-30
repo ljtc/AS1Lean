@@ -5,6 +5,8 @@ variable (a b c : Prop)
 
 /-
 # Lógica de proposiciones
+En esta sección mostraremos que todas las fórmulas proposicionales
+que afirmamos son tautologías lo son
 
 ## Comportamiento estructural
 Veremos que las proposiciones forman un álgebra de Boole.
@@ -158,5 +160,39 @@ example : (¬a → False) → a := by
   · intro h
     exfalso
     apply h ha
+
+--demostración por casos
+--(ya se ha ejercitado con la táctica `rcases`)
+example : (a ∨ b → c) ↔ (a → c) ∧ (b → c) := by
+  constructor
+  · intro h
+    constructor
+    · intro ha
+      apply h
+      left; assumption
+    · intro hb
+      apply h
+      right; assumption
+  · intro ⟨hac, hbc⟩ ab
+    rcases ab with ha | hb
+    · apply hac
+      exact ha
+    · apply hbc
+      exact hb
+
+--demostración de una conjunción
+--(ya se ha ejercitado con `constructor`)
+example : (a → b ∧ c) ↔ (a → b) ∧ (a → c) := by
+  constructor
+  · intro h
+    constructor
+    · intro ha
+      exact (h ha).1
+    · intro ha
+      exact (h ha).2
+  · intro ⟨hab, hac⟩ ha
+    constructor
+    · apply hab; assumption
+    · apply hac; assumption
 
 end prop
